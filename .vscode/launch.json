@@ -1,0 +1,38 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Kubernetes: Run/Debug",
+            "type": "cloudcode.kubernetes",
+            "request": "launch",
+            "autoStop": false,
+            "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+            "watch": true,
+            "cleanUp": false,
+            "portForward": true,
+            "imageRegistry": "gabbottron",
+            "debug": [
+                {
+                    "image": "server-debug",
+                    "containerName": "server-debug",
+                    "sourceFileMap": {
+                        "${workspaceFolder}": ""
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Attach to Kubernetes Pod (Go)",
+            "type": "cloudcode.kubernetes",
+            "request": "attach",
+            "language": "Go",
+            "debugPort": 40000,
+            "podSelector": {
+                "app": "server-debug"
+            },
+            "localRoot": "${workspaceFolder}",
+            "remotePath": "",
+            "remoteRoot": "/"
+        }
+    ]
+}
